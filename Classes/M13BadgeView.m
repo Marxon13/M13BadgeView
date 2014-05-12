@@ -214,7 +214,11 @@
     }
     //Calculate the width of the text
     CGFloat widthPadding = ceilf(_font.pointSize * .375);
-    CGSize textSize = [string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : _font} context:nil].size;
+    
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:(string ? string : @"") attributes:@{NSFontAttributeName : _font}];
+                                                                                                          
+    CGSize textSize = [attributedString boundingRectWithSize:(CGSize){CGFLOAT_MAX, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    
     if (include) {
         textSize.width += widthPadding * 2;
     }
