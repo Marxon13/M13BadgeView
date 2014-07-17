@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name         = "M13BadgeView"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "A customizable implementation of badges for UIViews."
 
   s.description  = <<-DESC
-                   A customizable implementation of badges for UIViews.
+                   A customizable implementation of badges for UIViews. Works on any UIView. It animates, and can control its own layout.
                    DESC
 
   s.homepage     = "https://github.com/Marxon13/M13BadgeView"
@@ -27,7 +27,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   s.platform     = :ios, '6.0'
 
-  s.source = { :git => "https://github.com/Marxon13/M13BadgeView.git", :tag => "v1.0.2"}
+  s.source = { :git => "https://github.com/Marxon13/M13BadgeView.git", :tag => "v1.0.3"}
 
   s.source_files  = 'Classes/*'
 

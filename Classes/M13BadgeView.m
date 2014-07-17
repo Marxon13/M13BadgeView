@@ -188,7 +188,7 @@
     }
     
     //Constrain to integers
-    frame = CGRectIntegral(frame);
+    frame = CGRectMake(ceilf(frame.origin.x), ceilf(frame.origin.y), ceilf(frame.size.width), ceilf(frame.size.height));
     
     //Change the frame
     self.frame = frame;
