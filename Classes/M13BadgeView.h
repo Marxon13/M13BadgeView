@@ -64,6 +64,8 @@ typedef enum {
 /**The maximum width of the badge.
  @note This setting only has an effect if it is larger than the height of the badge. If the size of the badge exceeds this size, the text will be truncated and "..." will be tacked onto the end of the string.*/
 @property (nonatomic, assign) CGFloat maximumWidth;
+/**The badge will be hidden if the text's value is equal to 0.*/
+@property (nonatomic, assign) BOOL hidesWhenZero;
 
 /**@name Border*/
 /**The width of the border. If set to zero, no border will be shown.*/
