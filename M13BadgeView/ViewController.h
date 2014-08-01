@@ -25,6 +25,7 @@
 - (IBAction)changeHorizontalAlignment:(id)sender;
 - (IBAction)changeVerticalAligment:(id)sender;
 - (IBAction)changeMaxWidth:(id)sender;
+- (IBAction)changeHideWhenZero:(id)sender;
 - (IBAction)changeShadowBadge:(id)sender;
 - (IBAction)changeShadowBorder:(id)sender;
 - (IBAction)changeShadowText:(id)sender;

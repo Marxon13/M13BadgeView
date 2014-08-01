@@ -77,6 +77,7 @@
     _shadowText = NO;
     _shadowBorder = NO;
     _shadowBadge = NO;
+    _hidesWhenZero = NO;
     
     //Set the minimum width / height if necessary;
     if (self.frame.size.height == 0 ) {
@@ -268,6 +269,9 @@
     }
     //Update the frame
     [self autoSetBadgeFrame];
+    
+    //Hide badge if text is zero
+    [self hideForZeroIfNeeded];
 }
 
 - (void)setTextColor:(UIColor *)textColor
@@ -367,6 +371,11 @@
     [self setNeedsDisplay];
 }
 
+- (void)setHidesWhenZero:(BOOL)hidesWhenZero{
+    _hidesWhenZero = hidesWhenZero;
+    [self hideForZeroIfNeeded];
+}
+
 - (void)setBorderWidth:(CGFloat)borderWidth
 {
     _borderWidth = borderWidth;
@@ -448,5 +457,10 @@
     }
 }
 
+#pragma mark - Private
+
+- (void)hideForZeroIfNeeded{
+    self.hidden = ([_text isEqualToString:@"0"] && _hidesWhenZero);
+}
 
 @end

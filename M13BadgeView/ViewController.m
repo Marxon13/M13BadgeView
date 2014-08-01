@@ -130,6 +130,11 @@
     _badgeView.maximumWidth = slider.value;
 }
 
+- (IBAction)changeHideWhenZero:(id)sender{
+    UISwitch *control = sender;
+    _badgeView.hidesWhenZero = control.on;
+}
+
 - (void)changeShadowBadge:(id)sender
 {
     UISwitch *control = sender;
