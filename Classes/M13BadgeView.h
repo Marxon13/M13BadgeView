@@ -37,6 +37,8 @@ typedef enum {
 @property (nonatomic, retain) UIColor *textColor;
 /**The font of the text.*/
 @property (nonatomic, retain) UIFont *font;
+/**The distance to shift the text by when the horizontal/vertical alignment is set. This is for fine tune adjustments.*/
+@property (nonatomic, assign) CGSize textAlignmentShift;
 
 /**@name Badge*/
 /**The background color of the badge.*/

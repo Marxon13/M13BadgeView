@@ -60,6 +60,7 @@
     
     //Set the default
     _textColor = [UIColor whiteColor];
+    _textAlignmentShift = CGSizeZero;
     _font = [UIFont systemFontOfSize:16.0];
     _badgeBackgroundColor = [UIColor redColor];
     _showGloss = NO;
@@ -233,7 +234,7 @@
 {
     [super layoutSubviews];
     //Update the frames of the layers
-    CGRect textFrame = CGRectMake(0, (ceilf(self.frame.size.height - _font.lineHeight) / 2), self.frame.size.width, _font.lineHeight);
+    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (ceilf(self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
     textLayer.frame = textFrame;
     backgroundLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     glossLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
