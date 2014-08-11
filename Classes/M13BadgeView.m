@@ -196,7 +196,7 @@
     self.frame = frame;
     CGRect tempFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     backgroundLayer.frame = tempFrame;
-    CGRect textFrame = CGRectMake(0, (ceilf(self.frame.size.height - _font.lineHeight) / 2), self.frame.size.width, _font.lineHeight);
+    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (ceilf(self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
     textLayer.frame = textFrame;
     glossLayer.frame = tempFrame;
     glossMaskLayer.frame = tempFrame;
