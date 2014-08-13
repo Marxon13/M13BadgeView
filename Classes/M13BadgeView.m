@@ -189,14 +189,11 @@
         _cornerRadius = self.frame.size.height / 2;
     }
     
-    //Constrain to integers
-    frame = CGRectMake(ceilf(frame.origin.x), ceilf(frame.origin.y), ceilf(frame.size.width), ceilf(frame.size.height));
-    
     //Change the frame
     self.frame = frame;
     CGRect tempFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     backgroundLayer.frame = tempFrame;
-    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (ceilf(self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
+    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (self.frame.size.height - _font.lineHeight) / 2 + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
     textLayer.frame = textFrame;
     glossLayer.frame = tempFrame;
     glossMaskLayer.frame = tempFrame;
@@ -215,18 +212,16 @@
         return CGSizeMake(0, 0);
     }
     //Calculate the width of the text
-    CGFloat widthPadding = ceilf(_font.pointSize * .375);
+    CGFloat widthPadding = _font.pointSize * .375;
     
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:(string ? string : @"") attributes:@{NSFontAttributeName : _font}];
-                                                                                                          
+    
     CGSize textSize = [attributedString boundingRectWithSize:(CGSize){CGFLOAT_MAX, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     
     if (include) {
         textSize.width += widthPadding * 2;
     }
-    //Constrain to integers
-    textSize.width = ceilf(textSize.width);
-    textSize.height = ceilf(textSize.height);
+
     return textSize;
 }
 
@@ -234,7 +229,7 @@
 {
     [super layoutSubviews];
     //Update the frames of the layers
-    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (ceilf(self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
+    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (self.frame.size.height - _font.lineHeight) / 2 + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
     textLayer.frame = textFrame;
     backgroundLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     glossLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
