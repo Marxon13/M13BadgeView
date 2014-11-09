@@ -79,6 +79,7 @@
     _shadowBorder = NO;
     _shadowBadge = NO;
     _hidesWhenZero = NO;
+    _pixelPerfectText = YES;
     
     //Set the minimum width / height if necessary;
     if (self.frame.size.height == 0 ) {
@@ -189,14 +190,29 @@
         _cornerRadius = self.frame.size.height / 2;
     }
     
-    //Constrain to integers
-    frame = CGRectMake(ceilf(frame.origin.x), ceilf(frame.origin.y), ceilf(frame.size.width), ceilf(frame.size.height));
+    //If we are pixel perfect, constrain to the pixels.
+    if (_pixelPerfectText) {
+        CGFloat roundScale = 1 / [UIScreen mainScreen].scale;
+        frame = CGRectMake(roundf(frame.origin.x / roundScale) * roundScale,
+                           roundf(frame.origin.y / roundScale) * roundScale,
+                           roundf(frame.size.width / roundScale) * roundScale,
+                           roundf(frame.size.height / roundScale) * roundScale);
+    }
     
     //Change the frame
     self.frame = frame;
     CGRect tempFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     backgroundLayer.frame = tempFrame;
-    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (ceilf(self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
+    CGRect textFrame;
+    if (_pixelPerfectText) {
+        CGFloat roundScale = 1 / [UIScreen mainScreen].scale;
+        textFrame = CGRectMake(self.textAlignmentShift.width,
+                              (roundf(((self.frame.size.height - _font.lineHeight) / 2) / roundScale) * roundScale) + self.textAlignmentShift.height,
+                              self.frame.size.width,
+                              _font.lineHeight);
+    } else {
+        textFrame = CGRectMake(self.textAlignmentShift.width, ((self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
+    }
     textLayer.frame = textFrame;
     glossLayer.frame = tempFrame;
     glossMaskLayer.frame = tempFrame;
@@ -215,7 +231,14 @@
         return CGSizeMake(0, 0);
     }
     //Calculate the width of the text
-    CGFloat widthPadding = ceilf(_font.pointSize * .375);
+    CGFloat widthPadding;
+    if (_pixelPerfectText) {
+        CGFloat roundScale = 1 / [UIScreen mainScreen].scale;
+        widthPadding = roundf((_font.pointSize * .375) / roundScale) * roundScale;
+    } else {
+        widthPadding = _font.pointSize * .375;
+    }
+    
     
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:(string ? string : @"") attributes:@{NSFontAttributeName : _font}];
                                                                                                           
@@ -225,8 +248,12 @@
         textSize.width += widthPadding * 2;
     }
     //Constrain to integers
-    textSize.width = ceilf(textSize.width);
-    textSize.height = ceilf(textSize.height);
+    if (_pixelPerfectText) {
+        CGFloat roundScale = 1 / [UIScreen mainScreen].scale;
+        textSize.width = roundf(textSize.width / roundScale) * roundScale;
+        textSize.height = roundf(textSize.height / roundScale) * roundScale;
+    }
+    
     return textSize;
 }
 
@@ -234,7 +261,16 @@
 {
     [super layoutSubviews];
     //Update the frames of the layers
-    CGRect textFrame = CGRectMake(self.textAlignmentShift.width, (ceilf(self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
+    CGRect textFrame;
+    if (_pixelPerfectText) {
+        CGFloat roundScale = 1 / [UIScreen mainScreen].scale;
+        textFrame = CGRectMake(self.textAlignmentShift.width,
+                               (roundf(((self.frame.size.height - _font.lineHeight) / 2) / roundScale) * roundScale) + self.textAlignmentShift.height,
+                               self.frame.size.width,
+                               _font.lineHeight);
+    } else {
+        textFrame = CGRectMake(self.textAlignmentShift.width, ((self.frame.size.height - _font.lineHeight) / 2) + self.textAlignmentShift.height, self.frame.size.width, _font.lineHeight);
+    }
     textLayer.frame = textFrame;
     backgroundLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     glossLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);

@@ -39,6 +39,9 @@ typedef enum {
 @property (nonatomic, retain) UIFont *font;
 /**The distance to shift the text by when the horizontal/vertical alignment is set. This is for fine tune adjustments.*/
 @property (nonatomic, assign) CGSize textAlignmentShift;
+/**Wether or not to align the text so that it is pixel perfect. Default is YES. 
+ @note If the text is aligned, it will be centered, and the position rounded to the nearest perfect pixel.*/
+@property (nonatomic, assign) BOOL pixelPerfectText;
 
 /**@name Badge*/
 /**The background color of the badge.*/
