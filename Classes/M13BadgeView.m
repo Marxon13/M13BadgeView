@@ -298,7 +298,7 @@
         if (_animateChanges) {
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_animationDuration * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                textLayer.string = text;
+                self->textLayer.string = text;
             });
         } else {
             textLayer.string = text;
