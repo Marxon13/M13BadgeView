@@ -96,7 +96,8 @@
     //Create the text layer
     textLayer = [CATextLayer layer];
     textLayer.foregroundColor = _textColor.CGColor;
-    textLayer.font = (__bridge CFTypeRef)(_font.fontName);
+//    textLayer.font = (__bridge CFTypeRef)(_font.fontName);
+    textLayer.font = (__bridge CFTypeRef)([UIFont systemFontOfSize:_font.pointSize]);
     textLayer.fontSize = _font.pointSize;
     textLayer.alignmentMode = kCAAlignmentCenter;
     textLayer.truncationMode = kCATruncationEnd;
@@ -321,7 +322,8 @@
 {
     _font = font;
     textLayer.fontSize = font.pointSize;
-    textLayer.font = (__bridge CFTypeRef)(font.fontName);
+//    textLayer.font = (__bridge CFTypeRef)(font.fontName);
+    textLayer.font = (__bridge CFTypeRef)([UIFont systemFontOfSize:_font.pointSize]);
     //Frame size needs to be changed to match the new font
     [self autoSetBadgeFrame];
 }
